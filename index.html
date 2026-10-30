@@ -3,49 +3,61 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Regex Drills — banc d'exercices vérifiés</title>
-<meta name="description" content="Trente exercices interactifs pour apprendre la syntaxe des expressions régulières : classes, quantificateurs, ancres, groupes, captures et lookarounds. La réponse est vérifiée par exécution réelle.">
+<title>Regex Drills — cours et exercices vérifiés</title>
+<meta name="description" content="Apprendre les expressions régulières depuis zéro : 9 leçons progressives avec exemples exécutés en direct, puis 30 exercices corrigés par le vrai moteur regex du navigateur.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23191713'/%3E%3Ctext x='16' y='23' font-family='monospace' font-size='17' fill='%23e8c37a' text-anchor='middle'%3E.*%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Regex Drills">
-<meta property="og:description" content="30 exercices interactifs : ta regex est testée pour de vrai, pas comparée à une chaîne.">
+<meta property="og:title" content="Regex Drills — apprendre les regex depuis zéro">
+<meta property="og:description" content="9 leçons progressives et 30 exercices corrigés par exécution réelle de la regex.">
 <meta property="og:url" content="https://neroclaw.github.io/regex-trainer/">
 <meta name="twitter:card" content="summary">
 </head>
-<body>
+<body data-mode="learn">
 <header class="topbar">
   <div class="wrap topbar-inner">
     <div class="brand">
       <span class="brand-mark" aria-hidden="true">.*</span>
       <div>
         <h1>Regex Drills</h1>
-        <p class="brand-sub">Banc d'exercices vérifiés</p>
+        <p class="brand-sub">Cours et exercices vérifiés</p>
       </div>
     </div>
+    <nav id="mode-tabs" class="modes" aria-label="Mode">
+      <button class="mode-tab" type="button" data-mode="learn" aria-current="true">Cours</button>
+      <button class="mode-tab" type="button" data-mode="drill" aria-current="false">Exercices</button>
+    </nav>
     <div class="progress">
-      <span id="progress-label" class="progress-label">0 / 30</span>
-      <div class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="30" aria-valuenow="0" aria-label="Exercices résolus">
+      <span id="progress-label" class="progress-label">0 / 9 leçons</span>
+      <div class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="9" aria-valuenow="0" aria-label="Leçons terminées">
         <div id="progress-fill" class="progress-fill"></div>
       </div>
     </div>
   </div>
 </header>
 
-<main class="wrap layout">
-  <nav id="chapters" class="chapters" aria-label="Chapitres"></nav>
-  <section id="card" class="card" aria-labelledby="ex-title"></section>
+<main class="wrap">
+  <div id="course-view" class="layout">
+    <nav id="lessons" class="chapters" aria-label="Leçons"></nav>
+    <article id="lesson" class="card lesson" aria-labelledby="lesson-title"></article>
+  </div>
+
+  <div id="drill-view" class="layout" hidden>
+    <nav id="chapters" class="chapters" aria-label="Chapitres"></nav>
+    <section id="card" class="card" aria-labelledby="ex-title"></section>
+  </div>
 </main>
 
 <footer class="wrap foot">
-  <p>Vérification par exécution réelle de la regex dans le navigateur. Progression sauvegardée localement.</p>
-  <button id="reset" class="link-btn" type="button">Réinitialiser la progression</button>
+  <p>Exemples et corrections exécutés pour de vrai dans le navigateur. Progression sauvegardée localement.</p>
+  <button id="reset" class="link-btn" type="button">Réinitialiser les exercices</button>
 </footer>
 
 <script src="data.js"></script>
+<script src="course.js"></script>
 <script src="app.js"></script>
 </body>
 </html>

@@ -200,6 +200,7 @@
     dom.progressFill.style.width = total ? ((solved / total) * 100) + '%' : '0%';
     dom.progressTrack.setAttribute('aria-valuenow', String(solved));
     dom.progressTrack.setAttribute('aria-valuemax', String(total));
+    dom.progressTrack.setAttribute('aria-label', 'Exercices résolus');
   }
 
   function currentChapter() {
@@ -490,6 +491,13 @@
 
     renderCard();
     renderProgress();
+
+    window.__drills = {
+      refresh: function () {
+        renderCard();
+        renderProgress();
+      }
+    };
   }
 
   if (document.readyState === 'loading') {
