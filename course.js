@@ -685,18 +685,36 @@
 
   function setMode(mode) {
     var learn = mode === 'learn';
-    dom.courseView.hidden = !learn;
-    dom.drillView.hidden = learn;
+
+    /* La bascule visuelle est faite par le CSS sur body[data-mode].
+       Un seul panneau peut donc être affiché, quoi qu'il arrive au JS. */
+    document.body.dataset.mode = mode;
+
     dom.modeTabs.querySelectorAll('[data-mode]').forEach(function (tab) {
       tab.setAttribute('aria-current', String(tab.dataset.mode === mode));
     });
-    document.body.dataset.mode = mode;
-    try { localStorage.setItem(MODE_KEY, mode); } catch (err) { /* ignore */ }
+    try { localStorage.setItem(MODE_KEY, mode); } catch (err) { /* mode privé */ }
+
     if (learn) {
       renderCourseProgress();
-    } else if (window.__drills && window.__drills.refresh) {
-      window.__drills.refresh();
+      return;
     }
+
+    if (window.__drills && window.__drills.refresh) {
+      window.__drills.refresh();
+    } else {
+      document.dispatchEvent(new CustomEvent('nero:mode'));
+    }
+    guardDrill();
+  }
+
+  /* Filet de sécurité : si le moteur d'exercices n'a pas pu démarrer,
+     on l'affiche noir sur blanc au lieu de laisser un panneau vide. */
+  function guardDrill() {
+    var card = document.getElementById('card');
+    if (!card || card.children.length) return;
+    card.innerHTML = '<p class="lesson-p">Le banc d\u2019exercices n\u2019a pas pu se charger. ' +
+      'Recharge la page en vidant le cache (Ctrl+F5, ou appui long sur le bouton recharger).</p>';
   }
 
   function bootCourse() {

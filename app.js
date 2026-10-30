@@ -489,6 +489,13 @@
       if (event.key === 'ArrowLeft' && event.altKey) { go(-1); }
     });
 
+    /* Le changement d'onglet est piloté par la vue Cours : on se re-rend
+       à chaque bascule, même si l'ordre de chargement des scripts varie. */
+    document.addEventListener('nero:mode', function () {
+      renderCard();
+      renderProgress();
+    });
+
     renderCard();
     renderProgress();
 

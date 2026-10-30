@@ -687,6 +687,19 @@ pre,
   display: none !important;
 }
 
+/* Visibilité pilotée par l'attribut de mode sur <body>, en CSS pur.
+   Comme ça, même si un fichier JS échoue ou si le cache sert une vieille feuille,
+   un seul panneau peut être affiché. Aucun script ne peut laisser les deux ouverts. */
+body[data-mode="learn"] #drill-view,
+body[data-mode="drill"] #course-view {
+  display: none !important;
+}
+
+body[data-mode="learn"] #course-view,
+body[data-mode="drill"] #drill-view {
+  display: grid;
+}
+
 /* 07. MODE ONGLETS */
 
 .modes {
@@ -696,6 +709,8 @@ pre,
   border: 1px solid var(--line-strong);
   border-radius: 99px;
   background: var(--paper);
+  position: relative;
+  z-index: 2;
 }
 
 .mode-tab {

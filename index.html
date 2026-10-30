@@ -9,7 +9,15 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="styles.css?v=3">
+<style>
+  /* Critique, inline : la bascule d'onglet ne doit jamais dépendre d'un fichier externe.
+     Même avec une feuille de style en cache, un seul panneau reste affiché. */
+  body[data-mode="learn"] #drill-view,
+  body[data-mode="drill"] #course-view { display: none !important; }
+  body[data-mode="learn"] #course-view,
+  body[data-mode="drill"] #drill-view { display: grid; }
+</style>
 <meta property="og:type" content="website">
 <meta property="og:title" content="Regex Drills — apprendre les regex depuis zéro">
 <meta property="og:description" content="9 leçons progressives et 30 exercices corrigés par exécution réelle de la regex.">
@@ -45,7 +53,7 @@
     <article id="lesson" class="card lesson" aria-labelledby="lesson-title"></article>
   </div>
 
-  <div id="drill-view" class="layout" hidden>
+  <div id="drill-view" class="layout">
     <nav id="chapters" class="chapters" aria-label="Chapitres"></nav>
     <section id="card" class="card" aria-labelledby="ex-title"></section>
   </div>
@@ -56,8 +64,8 @@
   <button id="reset" class="link-btn" type="button">Réinitialiser les exercices</button>
 </footer>
 
-<script src="data.js"></script>
-<script src="course.js"></script>
-<script src="app.js"></script>
+<script src="data.js?v=3"></script>
+<script src="course.js?v=3"></script>
+<script src="app.js?v=3"></script>
 </body>
 </html>
